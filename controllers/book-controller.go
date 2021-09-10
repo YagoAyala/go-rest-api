@@ -44,7 +44,7 @@ func FindOne(c *gin.Context) {
 		})
 		return
 	}
-	// teste
+
 	c.JSON(200, p)
 }
 
