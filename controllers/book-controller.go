@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ShowAllBooks(c *gin.Context) {
+func FindAll(c *gin.Context) {
 	db := database.GetDatabase()
 	var p []models.Book
 	err := db.Find(&p).Error
@@ -23,7 +23,7 @@ func ShowAllBooks(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func ShowBook(c *gin.Context) {
+func FindOne(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -48,7 +48,7 @@ func ShowBook(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func CreateBook(c *gin.Context) {
+func Create(c *gin.Context) {
 	db := database.GetDatabase()
 
 	var p models.Book
@@ -72,7 +72,7 @@ func CreateBook(c *gin.Context) {
 	c.JSON(201, p)
 }
 
-func DeleteBook(c *gin.Context) {
+func Delete(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -84,7 +84,6 @@ func DeleteBook(c *gin.Context) {
 	}
 
 	db := database.GetDatabase()
-
 	err = db.Delete(&models.Book{}, newid).Error
 
 	if err != nil {
@@ -97,7 +96,7 @@ func DeleteBook(c *gin.Context) {
 	c.Status(204)
 }
 
-func EditBook(c *gin.Context) {
+func Edit(c *gin.Context) {
 	db := database.GetDatabase()
 
 	var p models.Book
