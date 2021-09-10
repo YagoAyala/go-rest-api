@@ -22,12 +22,12 @@ func StartDB() {
 	}
 
 	db = database
-	config, _ := database.DB()
+	config, _ := db.DB()
 	config.SetMaxIdleConns(10)
 	config.SetMaxOpenConns(100)
 	config.SetConnMaxLifetime(time.Hour)
 
-	migrations.RunMigrations(database)
+	migrations.RunMigrations(db)
 }
 
 func CloseConn() error {
