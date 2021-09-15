@@ -13,8 +13,8 @@ import (
 var db *gorm.DB
 
 func StartDB() {
-	str := "host=localhost port=25432 user=admin dbname=books sslmode=disable password=123456"
-	database, err := gorm.Open(postgres.Open(str), &gorm.Config{})
+	const connection = "host=localhost port=5432 user=admin dbname=books sslmode=disable password=123456"
+	database, err := gorm.Open(postgres.Open(connection), &gorm.Config{})
 
 	if err != nil {
 		fmt.Println("Could not connect to the Postgres Database")
