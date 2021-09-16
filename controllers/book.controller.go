@@ -8,14 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func FindAll(c *gin.Context) {
+func FindAllBook(c *gin.Context) {
 	db := database.GetDatabase()
 	var p []models.Book
 	err := db.Find(&p).Error
 
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot find product by id: " + err.Error(),
+			"error": "cannot find product: " + err.Error(),
 		})
 		return
 	}

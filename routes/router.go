@@ -11,11 +11,12 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 	{
 		user := main.Group("user")
 		{
+			user.GET("/", controllers.FindAllUser)
 			user.POST("/", controllers.CreateUser)
 		}
 		books := main.Group("books", middlewares.Auth())
 		{
-			books.GET("/", controllers.FindAll)
+			books.GET("/", controllers.FindAllBook)
 			books.GET("/:id", controllers.FindOne)
 			books.POST("/", controllers.CreateBook)
 			books.PUT("/", controllers.Edit)
@@ -24,6 +25,6 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 
 		main.POST("login", controllers.Login)
 	}
-
+	//TODO: arrumar o erro em relação com a autenticação do middleware
 	return router
 }
