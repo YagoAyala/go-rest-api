@@ -48,7 +48,7 @@ func FindOne(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func Create(c *gin.Context) {
+func CreateBook(c *gin.Context) {
 	db := database.GetDatabase()
 
 	var p models.Book
