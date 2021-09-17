@@ -12,15 +12,18 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 		user := main.Group("user")
 		{
 			user.GET("/", controllers.FindAllUser)
+			user.GET("/:id", controllers.FindOneUser)
 			user.POST("/", controllers.CreateUser)
+			user.PUT("/", controllers.EditUser)
+			user.DELETE("/:id", controllers.DeleteUser)
 		}
 		books := main.Group("books", middlewares.Auth())
 		{
 			books.GET("/", controllers.FindAllBook)
-			books.GET("/:id", controllers.FindOne)
+			books.GET("/:id", controllers.FindOneBook)
 			books.POST("/", controllers.CreateBook)
-			books.PUT("/", controllers.Edit)
-			books.DELETE("/:id", controllers.Delete)
+			books.PUT("/", controllers.EditBook)
+			books.DELETE("/:id", controllers.DeleteBook)
 		}
 
 		main.POST("login", controllers.Login)

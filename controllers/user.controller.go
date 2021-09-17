@@ -24,7 +24,7 @@ func FindAllUser(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func findOne(c *gin.Context) {
+func FindOneUser(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -73,4 +73,52 @@ func CreateUser(c *gin.Context) {
 	}
 
 	c.Status(201)
+}
+
+func DeleteUser(c *gin.Context) {
+	id := c.Param("id")
+	newid, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "ID has to be integer",
+		})
+		return
+	}
+
+	db := database.GetDatabase()
+	err = db.Delete(&models.User{}, newid).Error
+
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "cannot delete user: " + err.Error(),
+		})
+		return
+	}
+
+	c.Status(204)
+}
+
+func EditUser(c *gin.Context) {
+	db := database.GetDatabase()
+
+	var p models.Book
+
+	err := c.ShouldBindJSON(&p)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "cannot bind JSON: " + err.Error(),
+		})
+		return
+	}
+
+	err = db.Save(&p).Error
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "cannot create user: " + err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, p)
 }

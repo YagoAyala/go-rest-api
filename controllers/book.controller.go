@@ -23,7 +23,7 @@ func FindAllBook(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func FindOne(c *gin.Context) {
+func FindOneBook(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -72,7 +72,7 @@ func CreateBook(c *gin.Context) {
 	c.JSON(201, p)
 }
 
-func Delete(c *gin.Context) {
+func DeleteBook(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -96,7 +96,7 @@ func Delete(c *gin.Context) {
 	c.Status(204)
 }
 
-func Edit(c *gin.Context) {
+func EditBook(c *gin.Context) {
 	db := database.GetDatabase()
 
 	var p models.Book
