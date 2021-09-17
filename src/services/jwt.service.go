@@ -28,7 +28,7 @@ func (s *jwtService) GenerateToken(id uint) (string, error) {
 	claim := &Claim{
 		id,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 2).Unix(),
+			ExpiresAt: time.Now().Add(time.Hour * 168).Unix(),
 			Issuer:    s.issure,
 			IssuedAt:  time.Now().Unix(),
 		},
@@ -49,7 +49,6 @@ func (s *jwtService) ValidateToken(token string) bool {
 		if _, isValid := t.Method.(*jwt.SigningMethodHMAC); !isValid {
 			return nil, fmt.Errorf("invalid token: %v", token)
 		}
-
 		return []byte(s.secretKey), nil
 	})
 
