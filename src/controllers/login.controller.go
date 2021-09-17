@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"github.com/YagoAyala/go-rest-api.git/database"
-	"github.com/YagoAyala/go-rest-api.git/models"
-	"github.com/YagoAyala/go-rest-api.git/services"
+	"github.com/YagoAyala/go-rest-api.git/src/database"
+	"github.com/YagoAyala/go-rest-api.git/src/models"
+	"github.com/YagoAyala/go-rest-api.git/src/services"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"github.com/YagoAyala/go-rest-api.git/controllers"
-	"github.com/YagoAyala/go-rest-api.git/server/middlewares"
+	"github.com/YagoAyala/go-rest-api.git/src/controllers"
+	"github.com/YagoAyala/go-rest-api.git/src/server/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,6 +28,6 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 
 		main.POST("login", controllers.Login)
 	}
-	//TODO: arrumar o erro em relação com a autenticação do middleware
+
 	return router
 }

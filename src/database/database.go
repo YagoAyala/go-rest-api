@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/YagoAyala/go-rest-api.git/database/migrations"
+	"github.com/YagoAyala/go-rest-api.git/src/database/migrations"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

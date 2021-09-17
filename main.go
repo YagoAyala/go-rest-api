@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/YagoAyala/go-rest-api.git/database"
-	"github.com/YagoAyala/go-rest-api.git/server"
+	"github.com/YagoAyala/go-rest-api.git/src/database"
+	"github.com/YagoAyala/go-rest-api.git/src/server"
 )
 
 func main() {

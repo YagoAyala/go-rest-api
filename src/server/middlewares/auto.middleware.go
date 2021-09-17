@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"github.com/YagoAyala/go-rest-api.git/services"
+	"github.com/YagoAyala/go-rest-api.git/src/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +17,5 @@ func Auth() gin.HandlerFunc {
 		if !services.NewJWTService().ValidateToken(token) {
 			c.AbortWithStatus(401)
 		}
-
 	}
 }

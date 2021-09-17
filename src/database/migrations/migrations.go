@@ -1,7 +1,7 @@
 package migrations
 
 import (
-	"github.com/YagoAyala/go-rest-api.git/models"
+	"github.com/YagoAyala/go-rest-api.git/src/models"
 	"gorm.io/gorm"
 )
 

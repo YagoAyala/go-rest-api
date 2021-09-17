@@ -3,7 +3,7 @@ package server
 import (
 	"log"
 
-	"github.com/YagoAyala/go-rest-api.git/routes"
+	"github.com/YagoAyala/go-rest-api.git/src/routes"
 	"github.com/gin-gonic/gin"
 )
 

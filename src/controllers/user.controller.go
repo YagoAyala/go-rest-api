@@ -3,19 +3,20 @@ package controllers
 import (
 	"strconv"
 
-	"github.com/YagoAyala/go-rest-api.git/database"
-	"github.com/YagoAyala/go-rest-api.git/models"
+	"github.com/YagoAyala/go-rest-api.git/src/database"
+	"github.com/YagoAyala/go-rest-api.git/src/models"
+	"github.com/YagoAyala/go-rest-api.git/src/services"
 	"github.com/gin-gonic/gin"
 )
 
-func FindAllBook(c *gin.Context) {
+func FindAllUser(c *gin.Context) {
 	db := database.GetDatabase()
-	var p []models.Book
+	var p []models.User
 	err := db.Find(&p).Error
 
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot find product: " + err.Error(),
+			"error": "cannot find user: " + err.Error(),
 		})
 		return
 	}
@@ -23,7 +24,7 @@ func FindAllBook(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func FindOneBook(c *gin.Context) {
+func FindOneUser(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -35,12 +36,12 @@ func FindOneBook(c *gin.Context) {
 	}
 
 	db := database.GetDatabase()
-	var p models.Book
+	var p models.User
 	err = db.First(&p, newid).Error
 
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot find product by id: " + err.Error(),
+			"error": "cannot find the user by id: " + err.Error(),
 		})
 		return
 	}
@@ -48,10 +49,10 @@ func FindOneBook(c *gin.Context) {
 	c.JSON(200, p)
 }
 
-func CreateBook(c *gin.Context) {
+func CreateUser(c *gin.Context) {
 	db := database.GetDatabase()
 
-	var p models.Book
+	var p models.User
 
 	err := c.ShouldBindJSON(&p)
 	if err != nil {
@@ -61,6 +62,8 @@ func CreateBook(c *gin.Context) {
 		return
 	}
 
+	p.Password = services.SHA256Encoder(p.Password)
+
 	err = db.Create(&p).Error
 	if err != nil {
 		c.JSON(400, gin.H{
@@ -69,10 +72,10 @@ func CreateBook(c *gin.Context) {
 		return
 	}
 
-	c.JSON(201, p)
+	c.Status(201)
 }
 
-func DeleteBook(c *gin.Context) {
+func DeleteUser(c *gin.Context) {
 	id := c.Param("id")
 	newid, err := strconv.Atoi(id)
 
@@ -84,11 +87,11 @@ func DeleteBook(c *gin.Context) {
 	}
 
 	db := database.GetDatabase()
-	err = db.Delete(&models.Book{}, newid).Error
+	err = db.Delete(&models.User{}, newid).Error
 
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot delete book: " + err.Error(),
+			"error": "cannot delete user: " + err.Error(),
 		})
 		return
 	}
@@ -96,7 +99,7 @@ func DeleteBook(c *gin.Context) {
 	c.Status(204)
 }
 
-func EditBook(c *gin.Context) {
+func EditUser(c *gin.Context) {
 	db := database.GetDatabase()
 
 	var p models.Book
@@ -112,7 +115,7 @@ func EditBook(c *gin.Context) {
 	err = db.Save(&p).Error
 	if err != nil {
 		c.JSON(400, gin.H{
-			"error": "cannot create book: " + err.Error(),
+			"error": "cannot create user: " + err.Error(),
 		})
 		return
 	}
